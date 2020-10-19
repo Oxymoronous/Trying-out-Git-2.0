@@ -13,8 +13,8 @@ def longestsubseq(str1, str2, i, j):
         return (longestsubseq(str1, str2, i-1, j-1) + last1)
     else:
         return (max(longestsubseq(str1, str2, i-1, j), longestsubseq(str1, str2, i, j-1)))
-if __name__ == '__main__':
 
-    arr1 = ['a', 'b', 'c', 'b', 'd', 'a', 'b']
-    arr2 = ["b", "d","c", "a", "b","a"]
-    print(longestsubseq(arr1, arr2, -1, -1))
+
+arr1 = ['a', 'b', 'c', 'b', 'd', 'a', 'b']
+arr2 = ["b", "d","c", "a", "b","a"]    
+print(longestsubseq(arr1, arr2, -1, -1))
