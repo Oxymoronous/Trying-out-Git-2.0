@@ -37,7 +37,7 @@ void permutation(char *s, int left, int right){
         printf("%s\n",s);
     }
     else{
-        for (i = left, i<right, i++){
+        for (i = left, i<=right, i++){
             swap(s[i],s[0]);
             permutation(s, left+1, right);
             swap(s[i],s[0]);
