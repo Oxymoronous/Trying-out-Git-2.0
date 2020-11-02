@@ -1,0 +1,57 @@
+Part B
+
+xBCD2 = n               ;R6 (xBCD2)           
+xBCD3 = accum           ;R5 (xBCD3),points just below this
+xBCD4 = frame pointer (xBCDB)  ; 
+xBCD5 = return address
+xBCD6 = return value 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;PART A
+xBCD7 = perim           ; end of caller setup (shuxian)
+xBCD8 = side
+xBCD9 = z               ; end of given
+xBCDA = side
+xBCDB = perim           ; R5 is here
+
+R5 at this point is 0xBCDB
+R6 at this point is 0xBCD7
+
+;Part C 
+;callee setup
+ADD R6, R6, #-5     ; allocate slots for book keeping & local var (3+2)
+STR R7, R6, #3      ; stores the return address 
+STR R5, R6, #2      ; stores frame pointer
+ADD R5, R6, #1      ; setup local frame pointer
+
+;function logic
+AND R0, R0, #0      ; resets R0 to 0
+STR R0, R6, #0      ; stores R0 to n in memory
+LDR R1, R6, #5      ; load R1 with perim
+STR R1, R6, #1      ; store perim into accum in memory
+
+WHILE
+ADD R2, R1, #-1     ; R2 is a dummy register to check loop condition 
+BRnz    BREAK
+LDR R3, R6, #6      ; load R3 with side
+NOT R3, R3          ;
+ADD R3, R3, #1      ; R3 is negated
+ADD R1, R1, R3      ; R1 now stores R1-R3
+ADD R0, R0, #1      ; this is n
+BR  WHILE        
+
+BREAK
+    ;callee teardown
+    STR  R0,R6,#4   ; push return value onto stack
+    LDR  R5,R6,#3   ; restore frame pointer
+    LDR  R7,R6,#5   ; restore return address
+    ADD  R6,R6,#5   ; free local var & book keeping space
+    RET 
+
+
+//////////////
+int array[3] = {1,2,3};
+array -> is a ptr 
+*(array+2) = 2;
+{1,2,2}
+
+array[2] == 
