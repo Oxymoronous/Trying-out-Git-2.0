@@ -12,7 +12,7 @@ int removeDuplicates(int *arr, int n){
 		}
 		
 	}
-	return (lastUnique);
+	return (lastUnique+1);
 }
 
 //problem2
@@ -22,15 +22,12 @@ int min (int a, int b){
 }
 
 int min_path_sum(int **grid, int m, int n, int i, int j){
-	if ((i == 0) && (j == 0))return 0;
-	int left = grid[i][j-1];
-	int up = grid[i-1][j];
-	int m = min(left, up);
-	if (m == left){
-		return min_path_sum(grid, m, n, i, j-1)+m;
-	}else{
-		return min_path_sum(grid, m, n, i-1 , j)+m; 
-	}
+	if ((i == 0) && (j == 0))return grid[i][j];
+	//out of bounds
+	int mps_l, mps_u;
+	mps_l = min_path_sum(grid,m,n,i,j-1);
+	mps_u = min_path_sum(grid,m,n,i-1,j);
+	return min(mps_l,mps_u)+grid[i][j];
 }
 
 //concepts questions
@@ -41,7 +38,7 @@ ori = 01234
 (4) 31240
 (3) 21340
 (2) 12340
-(1) 12340
+(1) 12340 
 
 2. how to engineer the code
 ReverseArray(array+1,size-1)
