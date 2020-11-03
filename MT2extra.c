@@ -52,22 +52,70 @@ int findpair(int array[], int start, int end){
     if (start == end){
         return 0;
     }
-    int count = 0;
-    int boo = 1;
-    while(boo){
-        int a = array[start];
-        int b = array[end];
-        if (a == b){
-            array[start] = -1;
-            array[end] = array[start]-1;
-            count += 1;
-            break;
+    int i;
+    int comp = array[start];
+    if(comp>0){
+        for (i = start+1; i<=end;i++){
+            if (array[i] == comp){
+                array[i] = -1;
+                array[start] = -1;
+                return findpair(array, start+1,end)+1;
+            }
         }
     }
-    int x = findpair(array, start+1,end)+count;
-    int y = findpair(array, start, end-1)+count;
-    if (x>=y){
-        return x;
-    }
-    return y;
+    return findpair(array, start+1, end);
 }
+
+int main()
+{
+    int array[7] = {11,5,7,9,11,3,5};
+    printf("%d\n", findpair(array,0,6));
+    for (int i = 0; i<7; i++){
+        printf("%d ",array[i]);
+    }
+}
+
+//runtime stack
+xBCD1   d
+xBCD2   c
+xBCD3   frame pointer
+xBCD4   return address
+xBCD5   return value
+//part B
+xBCD6   x           ;R6 points here
+xBCD7   n 
+//part A
+xBCD8   x[2] = 5    ;R6 points here
+xBCD9   x[1] = 3
+xBCDA   x[0] = 1
+xBCDB   n = 3       ;R5 points here 
+
+//callee setup
+ADD R6, R6, #-5     ;allocating space for bookkeeping + local var
+STR R5, R6, #3      ;stores frame pointer
+STR R7, R6, #4      ;stores return address
+ADD R5, R6, #1      ;R5 goes to the bottom of local variable
+
+//function logic
+AND R0, R0, #0      ;represents variable d
+STR R0, R6, #1      ;initializes c to 0
+STR R0, R6, #0      ;initializes d to 0
+AND R2, R2, #0      ;represents variable c
+LDR R1, R6, #6      ; 
+NOT R1, R1
+ADD R1, R1, #1      ;R1 stores the negative of b
+ADD R3, R0, R1      ;checking while loop condition
+BRzp    BREAK       ;d>=b
+ADD R4, R6, #9      ;loads R4 with the first element of the ReverseArray
+ADD R4, R4, R2      ;accessing the desire index      
+LDR R4, R4, #0      ;
+ADD R2, R4, R2      ;
+ADD R0, R0, #1      ;incrementing 'd'
+
+BREAK 
+//callee teardown
+STR R2, R6, #4      ;pushing return value into the stack
+LDR R5, R6, #2      ;restoring frame pointer
+LDR R7, R6, #3      ;restoring return address
+ADD R6, R6, #5      ;clearing the stack
+RET
