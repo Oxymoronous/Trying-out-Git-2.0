@@ -22,8 +22,11 @@ int min (int a, int b){
 }
 
 int min_path_sum(int **grid, int m, int n, int i, int j){
-	if ((i == 0) && (j == 0))return grid[i][j];
+	if ((i == 0) && (j == 0))return grid[i][j]; 
 	//out of bounds
+	if (i>=m || i<0 || j>=n || j<0){
+		return INT_MAX;
+	}
 	int mps_l, mps_u;
 	mps_l = min_path_sum(grid,m,n,i,j-1);
 	mps_u = min_path_sum(grid,m,n,i-1,j);
@@ -38,10 +41,11 @@ ori = 01234
 (4) 31240
 (3) 21340
 (2) 12340
-(1) 12340 
+Answer -> (1) 12340 
 
 2. how to engineer the code
-ReverseArray(array+1,size-1)
+//
+ReverseArray(array+1,size-2)
 
 //partB
 1. accessing 2D array that is in 1D
