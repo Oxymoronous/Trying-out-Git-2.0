@@ -11,7 +11,7 @@ int maxProfit(int *prices, int n){
         for(j=i; j<n; j++){
             sell = prices[j];
             tmp = sell - buy;
-            if (tmp>profit)profit = tmp;
+            if (tmp > profit) profit = tmp;
         }
     }
     return profit;
@@ -38,9 +38,9 @@ void permutation(char *s, int left, int right){
     }
     else{
         for (i = left, i<=right, i++){
-            swap(s[i],s[0]);
+            swap(s+i,s);
             permutation(s, left+1, right);
-            swap(s[i],s[0]);
+            swap(s+i,s);
         }
     }
 }
