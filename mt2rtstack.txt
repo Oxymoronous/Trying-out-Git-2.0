@@ -1,17 +1,17 @@
 Part B
 
-xBCD2 = n               ;R6 (xBCD2)           
-xBCD3 = accum           ;R5 (xBCD3),points just below this
-xBCD4 = frame pointer (xBCDB)  ; 
+xBCD2 = n                       ;R6 (xBCD2)           
+xBCD3 = accum                   ;R5 (xBCD3) points here, local variables of find_ngon()
+xBCD4 = frame pointer (xBCDB)   ;R6 from HKN is here; HKN reaches here at part A, which is weird
 xBCD5 = return address
 xBCD6 = return value 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;PART A
-xBCD7 = perim           ; end of caller setup (shuxian)
+xBCD7 = perim           ; end of caller setup 
 xBCD8 = side
 xBCD9 = z               ; end of given
 xBCDA = side
-xBCDB = perim           ; R5 is here
+xBCDB = perim           ;R5 is here; local variables of main(); R5 is always at the bottom of local variables 
 
 R5 at this point is 0xBCDB
 R6 at this point is 0xBCD7
