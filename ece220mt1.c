@@ -45,7 +45,7 @@ Answer -> (1) 12340
 
 2. how to engineer the code
 //
-ReverseArray(array+1,size-2)
+ReverseArray(array+1,size-2) //honestly dont know why it is size-2 and not size-1
 
 //partB
 1. accessing 2D array that is in 1D
