@@ -7,7 +7,7 @@ int ReverseArray(int array[], int arraySize){
     int tmp = array[start];
     array[start] = array[right];
     array[right] = tmp;
-    return ReverseArray(array+1, arraySize-1);
+    return ReverseArray(array+1, arraySize-2); //similar to prac 1 and dunno why is -2
 }
 
 int dotProduct(int vectorA[], int vectorB[], int vectorLength){
