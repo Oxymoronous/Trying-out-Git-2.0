@@ -85,9 +85,9 @@ xBCD5   return value
 xBCD6   x           ;R6 points here
 xBCD7   n 
 //part A
-xBCD8   x[2] = 5    ;R6 points here
+xBCD8   x[0] = 1    ;R6 points here
 xBCD9   x[1] = 3
-xBCDA   x[0] = 1
+xBCDA   x[2] = 5
 xBCDB   n = 3       ;R5 points here 
 
 //callee setup
