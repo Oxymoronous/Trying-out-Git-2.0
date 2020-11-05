@@ -38,9 +38,9 @@ void permutation(char *s, int left, int right){
     }
     else{
         for (i = left, i<=right, i++){
-            swap(s+i,s);
+            swap(s+i,s+left);
             permutation(s, left+1, right);
-            swap(s+i,s);
+            swap(s+i,s+left);
         }
     }
 }
